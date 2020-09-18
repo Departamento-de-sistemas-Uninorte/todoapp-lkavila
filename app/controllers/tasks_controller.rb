@@ -3,7 +3,14 @@ class TasksController < ApplicationController
         @tasks = Task.all
     end
 
-    #GET with blank form 
+    def show 
+        @task = Task.find(params[:id])
+    end
+
+    def edit
+        @task = Task.find(params[:id])
+    end
+        #GET with blank form 
     def new
         @task = Task.new
     end
@@ -18,6 +25,15 @@ class TasksController < ApplicationController
         else
             # /TODO: add flash messages whit errors
             render :new
+        end
+    end
+
+    def update 
+        @task = Task.find(params[:id])
+        if @task.update(task_params)
+            # /TODO: add flash messages whit succes
+
+            redirect_to tasks_path
         end
     end
 
